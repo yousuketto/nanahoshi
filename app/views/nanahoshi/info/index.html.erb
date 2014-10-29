@@ -1,2 +1,60 @@
-<h1>Nanahoshi::Info#index</h1>
-<p>Find me in app/views/nanahoshi/info/index.html.erb</p>
+<style>
+body{mergin:8px}
+
+.link {stroke: #666; stroke-width: 1.5px;}
+
+circle {
+  fill: #ccc;
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+text {
+  font: 10px sans-serif;
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
+</style>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+var nodes = <%= @nodes.to_json.html_safe %>;
+var links = <%= @edges.to_json.html_safe %>;
+
+var width = (window.innerWidth || 950) - 16;
+var height = (window.innerHeight || 500) - 16;
+var force = d3.layout.force().nodes(nodes).links(links).size([width, height])
+    .linkDistance(60).charge(-300).on("tick", tick).start();
+
+var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
+
+svg.append("defs").append("marker")
+    .attr("id", "arrow-head").attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15).attr("refY", -1.5)
+    .attr("markerWidth", 6).attr("markerHeight", 6).attr("orient", "auto")
+    .append("path").attr("d", "M0,-5L10,0L0,5");
+
+var line = svg.append("g").attr("class", "line-group")
+    .selectAll("line").data(links).enter()
+    .append("line").attr("class", "link").attr("marker-end", "url(#arrow-head)");
+
+var circle = svg.append("g").attr("class", "circle-group")
+    .selectAll("circle").data(nodes).enter()
+    .append("circle").attr("r", 6).call(force.drag);
+
+var text = svg.append("g").attr("class", "text-group")
+    .selectAll("text").data(nodes).enter()
+    .append("text").attr("x", 8).attr("y", ".31em")
+    .text(function(d) { return d.name; });
+
+function tick() {
+    line.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+    circle.attr("transform", transform);
+    text.attr("transform", transform);
+}
+function transform(d) {
+  return "translate(" + d.x + "," + d.y + ")";
+}
+</script>
