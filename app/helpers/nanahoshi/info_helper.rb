@@ -1,2 +1,0 @@
-module Nanahoshi::InfoHelper
-end
