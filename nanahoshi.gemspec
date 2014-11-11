@@ -7,16 +7,15 @@ require "nanahoshi/version"
 Gem::Specification.new do |s|
   s.name        = "nanahoshi"
   s.version     = Nanahoshi::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Nanahoshi."
-  s.description = "TODO: Description of Nanahoshi."
+  s.authors     = ["yousuketto"]
+  s.email       = ["yosuketto@gmail.com"]
+  s.homepage    = "https://github.com/yousuketto/nanahoshi"
+  s.summary     = "Nanahoshi is web ui for gem dependencies graph."
+  s.description = "Nanahoshi is web ui for gem dependencies graph."
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 4.1.6"
+  s.add_dependency "rails", ">= 3.0.0"
   s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "sqlite3"
 end
