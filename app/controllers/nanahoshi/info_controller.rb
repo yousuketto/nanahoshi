@@ -9,13 +9,18 @@ class Nanahoshi::InfoController < ApplicationController
     end
 
     gem_names = hash.keys
-    @nodes = gem_names.map{|gem_name|{name: gem_name}}
+    @nodes = gem_names.map{|gem_name|{name: gem_name, type: [:start_leaf, :end_leaf]}}
 
     @edges = []
-    hash.each do |gem, deps|
-      source_index = gem_names.index(gem)
+    hash.each do |gem_name, deps|
+      source_index = gem_names.index(gem_name)
+      unless deps.empty?
+        @nodes[source_index][:type].delete(:end_leaf)
+      end
       dependence_edges = deps.map do |dep|
-        {source: source_index, target: gem_names.index(dep)}
+        target_index = gem_names.index(dep)
+        @nodes[target_index][:type].delete(:start_leaf)
+        {source: source_index, target: target_index}
       end
 
       @edges.concat(dependence_edges)

@@ -8,7 +8,9 @@ circle {
   stroke: #333;
   stroke-width: 1.5px;
 }
-
+circle.start_leaf{fill: #ffc0cb}
+circle.end_leaf{fill: #90ee90}
+circle.start_leaf.end_leaf{fill: #f0e68c}
 text {
   font: 10px sans-serif;
   pointer-events: none;
@@ -39,7 +41,7 @@ var line = svg.append("g").attr("class", "line-group")
 
 var circle = svg.append("g").attr("class", "circle-group")
     .selectAll("circle").data(nodes).enter()
-    .append("circle").attr("r", 6).call(force.drag);
+    .append("circle").attr("class", function(d){return (d.type || []).join(" ")}).attr("r", 6).call(force.drag);
 
 var text = svg.append("g").attr("class", "text-group")
     .selectAll("text").data(nodes).enter()
