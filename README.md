@@ -22,7 +22,6 @@ access to ```http://localhost:3000/rails/info/gems```
 ## TODO
 - standalone (no dependence rails engine)
 - zoom in and zoom out
-- make it easier to find leaf nodes.
 - spec
 
 ## Contributing
