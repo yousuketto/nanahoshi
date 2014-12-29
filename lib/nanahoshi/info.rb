@@ -1,3 +1,4 @@
+require 'bundler'
 module Nanahoshi::Info
   class << self
     def nodes_and_edges
