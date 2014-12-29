@@ -1,0 +1,22 @@
+require 'nanahoshi'
+require 'rack'
+require 'erb'
+s = Rack::Server.new
+erb_file_path = File.expand_path("../../app/views/nanahoshi/info/index.html.erb", __FILE__)
+class String
+  def html_safe
+    self
+  end
+end
+erb = ERB.new(File.open(erb_file_path, "r:UTF-8", &:read))
+
+app = ->(env){
+  @nodes, @edges = Nanahoshi::Info.nodes_and_edges
+  [
+    200,
+    {'Content-Type' => 'text/html'},
+    ["<html><body>#{erb.result(binding)}</body></html>"]
+  ]
+}
+s.instance_variable_set(:@app, app)
+s.start
