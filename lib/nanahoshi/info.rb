@@ -5,7 +5,7 @@ module Nanahoshi::Info
       graph = load_graph
       gem_names = graph.keys
 
-      nodes = gem_names.map{|gn|{name: gn, type: %i(start_leaf end_leaf)}}
+      nodes = gem_names.map{|gn|{name: gn, type: [:start_leaf, :end_leaf]}}
 
       edges = []
       graph.each do |gem_name, deps|
