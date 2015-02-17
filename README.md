@@ -3,7 +3,6 @@
 Nanahoshi is web ui for gem dependencies graph.
 
 ## Installation
-
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -17,10 +16,24 @@ And then execute:
     $ bundle
 
 ## Usage
-access to ```http://localhost:3000/rails/info/gems```
+### For Rails
+Start Rails server:
+
+    $  bundle exec rails s -b 0.0.0.0
+
+Access to ```http://localhost:3000/rails/info/gems```
+
+### For without Rails
+Start Nanahoshi server:
+
+    $  nanahoshi -o 0.0.0.0
+
+Access to ```http://localhost:9292```
+
+
 
 ## TODO
-- standalone (no dependence rails engine)
+- standalone in ``bundle install --path gemdir`` environments.
 - zoom in and zoom out
 
 ## Contributing
