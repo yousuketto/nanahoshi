@@ -14,8 +14,11 @@ Gem::Specification.new do |s|
   s.description = "Nanahoshi is web ui for gem dependencies graph."
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc", "bin/nanahoshi"]
+  s.executables = ["nanahoshi"]
 
-  s.add_dependency "rails", ">= 3.0.0"
+  s.add_dependency "rack"
+  s.add_dependency "bundler"
+  s.add_development_dependency "rails", ">= 3.0.0"
   s.add_development_dependency "rspec-rails"
 end
